@@ -96,6 +96,7 @@ public class UpdatePage extends Procedure {
             }
         }
 
+
         // I'm removing AND page_latest = "+a.revisionId+" from the query, since
         // it creates sometimes problem with the data, and page_id is a PK
         // anyway
@@ -134,9 +135,6 @@ public class UpdatePage extends Procedure {
         // REMOVED
         // sql="INSERT INTO `cu_changes` () VALUES ();";
         // st.addBatch(sql);
-
-        // New transaction batch.
-        conn.commit();
 
         // SELECT WATCHING USERS
         ArrayList<Integer> wlUser = new ArrayList<>();
@@ -193,9 +191,6 @@ public class UpdatePage extends Procedure {
 
         // This is always executed, sometimes as a separate transaction,
         // sometimes together with the previous one
-
-        // New transaction batch.
-        conn.commit();
 
         try (PreparedStatement ps = this.getPreparedStatement(conn, insertLogging)) {
             int param = 1;
