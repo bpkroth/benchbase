@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.SQLTransactionRollbackException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
@@ -489,6 +490,10 @@ public abstract class Worker<T extends BenchmarkModule> implements Runnable {
         int errorCode = ex.getErrorCode();
 
         LOG.debug("sql state [{}] and error code [{}]", sqlState, errorCode);
+
+        if (ex instanceof SQLTransactionRollbackException) {
+            return true;
+        }
 
         if (sqlState == null) {
             return false;
