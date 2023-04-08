@@ -112,7 +112,10 @@ public class WikipediaWorker extends Worker<WikipediaBenchmark> {
                 this.getPageAuthenticated(conn, true, this.generateUserIP(), userId, nameSpace, pageTitle);
             }
         } catch (SQLException esql) {
-            LOG.error("Caught SQL Exception in WikipediaWorker for procedure{}:{}", procClass.getName(), esql, esql);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Caught SQLException (state: {}, error: {}) in WikipediaWorker for procedure {}: {}",
+                    esql.getSQLState(), esql.getErrorCode(), procClass.getName(), esql, esql);
+            }
             throw esql;
         }
         return (TransactionStatus.SUCCESS);
