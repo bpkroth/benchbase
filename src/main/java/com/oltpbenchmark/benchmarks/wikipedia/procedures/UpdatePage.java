@@ -120,7 +120,7 @@ public class UpdatePage extends Procedure {
             ps.setInt(param++, pageId);           // rc_cur_id
             ps.setInt(param++, userId);           // rc_user
             ps.setString(param++, userText);      // rc_user_text
-            ps.setString(param++, revComment);    // rc_comment
+            ps.setString(param++, revComment.substring(0, Math.min(revComment.length(), 255-1))); // rev_comment
             ps.setLong(param++, nextTextId);      // rc_this_oldid
             ps.setLong(param++, textId);          // rc_last_oldid
             ps.setInt(param++, 0);                // rc_bot
