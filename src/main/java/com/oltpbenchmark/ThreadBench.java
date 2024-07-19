@@ -148,6 +148,7 @@ public class ThreadBench implements Thread.UncaughtExceptionHandler {
     long start = System.nanoTime();
     long warmupStart = System.nanoTime();
     long warmup = warmupStart;
+    long startTsAfterWarmUp = startTs;
     long measureEnd = -1;
 
     long intervalNs = getInterval(lowestRate, phase.getArrival());
@@ -291,6 +292,7 @@ public class ThreadBench implements Thread.UncaughtExceptionHandler {
           }
           interruptWorkers();
         }
+        startTsAfterWarmUp += (now - start) / 1000000;
         start = now;
         LOG.info("{} :: Warmup complete, starting measurements.", StringUtil.bold("MEASURE"));
         // measureEnd = measureStart + measureSeconds * 1000000000L;
@@ -346,6 +348,7 @@ public class ThreadBench implements Thread.UncaughtExceptionHandler {
               // final Results state so we can exit non-zero *after* we output the results.
               errorsThrown ? State.ERROR : testState.getState(),
               startTs,
+              startTsAfterWarmUp,
               measureEnd - start,
               requests,
               stats,

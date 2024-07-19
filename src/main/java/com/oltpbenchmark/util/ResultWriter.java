@@ -89,6 +89,8 @@ public class ResultWriter {
     Date now = new Date();
     summaryMap.put("Start timestamp (milliseconds)", results.getStartTimestampMs());
     summaryMap.put("Current Timestamp (milliseconds)", now.getTime());
+    summaryMap.put(
+        "Start timestamp after warmup (milliseconds)", results.getStartTimestampAfterWarmUpMs());
     summaryMap.put("Elapsed Time (nanoseconds)", results.getNanoseconds());
     summaryMap.put("DBMS Type", dbType);
     summaryMap.put("DBMS Version", collector.collectVersion());
