@@ -19,7 +19,7 @@ public class MySQLMonitor extends DatabaseMonitor {
   // TODO: add support for per-query metrics using performance_schema
 
   // TODO: Expand to SHOW ENGINE INNODB STATUS as well?
-  private final String MYSQL_SYSTEM_METRICS = "SHOW GLOBAL STATUS;";
+  private final String MYSQL_SYSTEM_METRICS = "show global status like '%';";
 
   private final List<String> repeatedSystemProperties;
 
@@ -36,11 +36,13 @@ public class MySQLMonitor extends DatabaseMonitor {
             add("Connections");
             add("Threads_running");
             add("Threads_connected");
+            add("Threads_created");
             add("Handler_write");
             add("Handler_commit");
             add("Handler_update");
             add("Handler_delete");
             add("Handler_read_next");
+            add("Com_create_table");
             add("Com_select");
             add("Com_insert");
             add("Com_insert_select");
@@ -60,6 +62,8 @@ public class MySQLMonitor extends DatabaseMonitor {
             add("Innodb_rows_read");
             add("Innodb_rows_updated");
             add("Innodb_buffer_pool_read_requests");
+            add("Innodb_buffer_pool_write_requests");
+            add("Innodb_buffer_pool_reads");
             add("Sort_merge_passes");
             add("Sort_range");
             add("Sort_rows");
