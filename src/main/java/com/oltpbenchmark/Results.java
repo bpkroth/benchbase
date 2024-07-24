@@ -136,7 +136,7 @@ public final class Results {
     sb.append(state);
     sb.append(", nanoSeconds=");
     sb.append(nanoseconds);
-    sb.append(", startTimestampAfterWarmUpNs=");
+    sb.append(", startTimestampAfterWarmUpMs=");
     sb.append(startTimestampAfterWarmUpMs);
     sb.append(", measuredRequests=");
     sb.append(measuredRequests);
