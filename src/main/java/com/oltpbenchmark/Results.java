@@ -29,6 +29,7 @@ public final class Results {
 
   private final State state;
   private final long startTimestampMs;
+  private final long startTimestampAfterWarmUpMs;
   private final long nanoseconds;
   private final int measuredRequests;
   private final DistributionStatistics distributionStatistics;
@@ -44,11 +45,13 @@ public final class Results {
   public Results(
       State state,
       long startTimestampMs,
+      long startTimestampAfterWarmUpMs,
       long elapsedNanoseconds,
       int measuredRequests,
       DistributionStatistics distributionStatistics,
       final List<LatencyRecord.Sample> latencySamples) {
     this.startTimestampMs = startTimestampMs;
+    this.startTimestampAfterWarmUpMs = startTimestampAfterWarmUpMs;
     this.nanoseconds = elapsedNanoseconds;
     this.measuredRequests = measuredRequests;
     this.distributionStatistics = distributionStatistics;
@@ -114,6 +117,10 @@ public final class Results {
     return startTimestampMs;
   }
 
+  public long getStartTimestampAfterWarmUpMs() {
+    return startTimestampAfterWarmUpMs;
+  }
+
   public long getNanoseconds() {
     return nanoseconds;
   }
@@ -129,6 +136,8 @@ public final class Results {
     sb.append(state);
     sb.append(", nanoSeconds=");
     sb.append(nanoseconds);
+    sb.append(", startTimestampAfterWarmUpMs=");
+    sb.append(startTimestampAfterWarmUpMs);
     sb.append(", measuredRequests=");
     sb.append(measuredRequests);
     sb.append(") = ");
